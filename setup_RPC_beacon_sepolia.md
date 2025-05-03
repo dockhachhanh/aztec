@@ -1,3 +1,5 @@
+# HƯỚNG DẪN CÀI ĐẶT BEACON RPC VÀ SEPOLIA RPC
+---
 ## Bước 1: Cài đặt Rust
 Lighthouse được viết bằng Rust, nên cần cài Rust để biên dịch.
 Cài đặt Rust:
