@@ -35,3 +35,17 @@ StandardError=journal
 [Install]
 WantedBy=multi-user.target" | sudo tee /etc/systemd/system/aztec-sequencer.service > /dev/null 
 ```
+start service
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable aztec-sequencer
+sudo systemctl start aztec-sequencer
+```
+check status
+```bash
+sudo systemctl status aztec-sequencer
+```
+check logs
+```bash
+sudo journalctl -fu aztec-sequencer
+```
