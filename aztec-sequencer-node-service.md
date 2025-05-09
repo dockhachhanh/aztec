@@ -10,9 +10,6 @@ VALIDATOR_PRIVATE_KEY=0x<private key>
 COINBASE=0x<wallet address>
 P2P_IP= <public ip>
 P2P_PORT=40400
-LOG_LEVEL=debug
-P2P_MAX_TX_POOL_SIZE=1000000000
-P2P_MAX_PEERS=50
 ```
 create aztec-sequencer.service
 ```bash
@@ -26,7 +23,7 @@ User=$USER
 Group=$USER
 WorkingDirectory=$HOME/.aztec
 EnvironmentFile=$HOME/.aztec/.env
-ExecStart=$HOME/.aztec/bin/aztec start --node --archiver --sequencer --network alpha-testnet --p2p.maxPeers --log-level
+ExecStart=$HOME/.aztec/bin/aztec start --node --archiver --sequencer --network alpha-testnet --p2p.maxPeers 100 --log-level debug
 Restart=always
 RestartSec=10
 StandardOutput=journal
