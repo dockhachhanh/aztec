@@ -75,14 +75,14 @@ nano $HOME/lighthouse-docker/docker-compose.yml
 ```
 - Dán nội dung sau vào tệp:
 ```yaml
-version: "3.8"
 services:
   geth:
     image: ethereum/client-go:stable
+    tty: true
     container_name: geth
     volumes:
       - ./geth-data:/root/.ethereum
-      - ./jwt:/jwt
+      - ./jwt/jwt.hex:/jwt.hex
     ports:
       - "8545:8545"
       - "8551:8551"
@@ -93,33 +93,37 @@ services:
       --http.api eth,net,web3
       --authrpc.addr 0.0.0.0
       --authrpc.port 8551
-      --authrpc.jwtsecret /jwt/jwt.hex
+      --authrpc.jwtsecret /jwt.hex
+      --authrpc.vhosts=*
+      --ws
       --syncmode snap
     networks:
       - lighthouse-network
     restart: unless-stopped
 
   lighthouse:
-    image: sigp/lighthouse:stable
+    image: sigp/lighthouse:v7.0.1
+    tty: true
     container_name: lighthouse
+    depends_on:
+      - geth
     volumes:
       - ./lighthouse-data:/root/.lighthouse
-      - ./jwt:/jwt
+      - ./jwt/jwt.hex:/jwt.hex
     ports:
       - "5052:5052"
       - "9000:9000/udp"
       - "9000:9000/tcp"
     command: >
-      beacon_node
+      sh -c "sleep 10 &&
+      lighthouse beacon
       --network sepolia
       --execution-endpoint http://geth:8551
-      --execution-jwt /jwt/jwt.hex
+      --execution-jwt /jwt.hex
       --http
       --http-address 0.0.0.0
       --http-port 5052
-      --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io
-    depends_on:
-      - geth
+      --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io"
     networks:
       - lighthouse-network
     restart: unless-stopped
@@ -127,6 +131,7 @@ services:
 networks:
   lighthouse-network:
     driver: bridge
+
 ```
 Lưu và thoát (Ctrl+O, Enter, Ctrl+X).
 ### Giải thích:
