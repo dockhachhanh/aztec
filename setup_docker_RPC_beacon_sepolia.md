@@ -6,29 +6,37 @@
 - Máy chủ với ít nhất 4GB RAM, 2 CPU, và 100GB ổ cứng (khuyến nghị).
 - Hệ điều hành Linux (Ubuntu 20.04 hoặc mới hơn được khuyến nghị).
 ---
-## Bước 1: Cài đặt Docker
-- Cài đặt Docker nếu chưa có:
+## Bước 1: Cài đặt phụ thuộc
 ```bash
-sudo apt update
-sudo apt install -y docker.io
-sudo systemctl start docker
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev cmake -y
+```
+- Cài đặt docker compose
+```bash
+  sudo apt update -y && sudo apt upgrade -y
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update -y && sudo apt upgrade -y
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Test Docker
+sudo docker run hello-world
+
 sudo systemctl enable docker
-```
-- Kiểm tra phiên bản Docker:
-```bash
-docker --version
-```
-- Nên thấy phiên bản (ví dụ: Docker version 20.10.x).
-- (Tùy chọn) Cài đặt Docker Compose:
-```bash
-sudo apt install -y docker-compose
-```
-- Kiểm tra:
-```bash
-docker-compose --version
-```
-- Thêm user vào nhóm Docker để chạy lệnh mà không cần sudo:
-```bash
+sudo systemctl restart docker
+
 sudo usermod -aG docker $USER
 newgrp docker
 ```
