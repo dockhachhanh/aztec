@@ -123,7 +123,7 @@ services:
       --http
       --http-address 0.0.0.0
       --http-port 5052
-      --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io"
+      --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io
     networks:
       - lighthouse-network
     restart: unless-stopped
