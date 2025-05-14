@@ -83,6 +83,7 @@ services:
       --http
       --http.addr 0.0.0.0
       --http.api eth,net,web3
+      --authrpc.addr 0.0.0.0
       --authrpc.port 8551
       --authrpc.jwtsecret /jwt/jwt.hex
       --syncmode snap
