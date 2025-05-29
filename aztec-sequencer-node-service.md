@@ -9,40 +9,52 @@ L1_CONSENSUS_HOST_URLS=<http...> // beacon rpc
 VALIDATOR_PRIVATE_KEY=0x<private key>
 COINBASE=0x<wallet address>
 P2P_IP= <public ip>
-P2P_PORT=40400
 ```
-create aztec-sequencer.service
+create aztec.service
 ```bash
-echo "[Unit]
-Description=Aztec Sequencer Node
-After=network-online.target
-Wants=network-online.target
+sudo nano /etc/systemd/system/aztec.service
+```
+- Dán nội dung sau:
+```bash
+[Unit]
+Description=Aztec Validator Node
+After=network.target docker.service
+Requires=docker.service
 
 [Service]
+Type=simple
 User=$USER
-Group=$USER
-WorkingDirectory=$HOME/.aztec
-EnvironmentFile=$HOME/.aztec/.env
-ExecStart=$HOME/.aztec/bin/aztec start --node --archiver --sequencer --network alpha-testnet --p2p.maxPeers 100 --log-level debug
+WorkingDirectory=/home/$USER/.aztec
+EnvironmentFile=/home/$USER/.aztec/.env
+ExecStart=/home/YOUR_USERNAME/.aztec/bin/aztec start --node --archiver --sequencer \
+  --network alpha-testnet \
+  --l1-rpc-urls ${ETHEREUM_HOSTS} \
+  --l1-consensus-host-urls ${L1_CONSENSUS_HOST_URLS} \
+  --sequencer.validatorPrivateKey ${VALIDATOR_PRIVATE_KEY} \
+  --sequencer.coinbase ${COINBASE} \
+  --p2p.p2pIp ${P2P_IP} \
+  --p2p.p2pPort 40401 \
+  --port 8081
 Restart=always
-RestartSec=10
+RestartSec=5
 StandardOutput=journal
 StandardError=journal
 
 [Install]
-WantedBy=multi-user.target" | sudo tee /etc/systemd/system/aztec-sequencer.service > /dev/null 
+WantedBy=multi-user.target
+
 ```
 start service
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable aztec-sequencer
-sudo systemctl start aztec-sequencer
+sudo systemctl enable aztec
+sudo systemctl start aztec
 ```
 check status
 ```bash
-sudo systemctl status aztec-sequencer
+sudo systemctl status aztec
 ```
 check logs
 ```bash
-sudo journalctl -fu aztec-sequencer
+sudo journalctl -fu aztec
 ```
