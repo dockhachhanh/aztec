@@ -3,8 +3,8 @@
 ##Yêu cầu
 - Docker: Đã được cài đặt trên hệ thống.
 - Docker Compose (tùy chọn): Để quản lý nhiều container.
-- Máy chủ với ít nhất 4GB RAM, 2 CPU, và 100GB ổ cứng (khuyến nghị).
-- Hệ điều hành Linux (Ubuntu 20.04 hoặc mới hơn được khuyến nghị).
+- Máy chủ với cấu hình đề nghị 8 cores 16Gb ram với SSD NVME dung lượng tối thiểu 1TB.
+- Hệ điều hành Linux (Ubuntu 22.04 hoặc mới hơn được khuyến nghị).
 ---
 ## Bước 1: Cài đặt phụ thuộc
 ```bash
