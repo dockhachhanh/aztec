@@ -114,16 +114,7 @@ services:
       - "5052:5052"
       - "9000:9000/udp"
       - "9000:9000/tcp"
-    command: >
-      sh -c "sleep 10 &&
-      lighthouse beacon
-      --network sepolia
-      --execution-endpoint http://geth:8551
-      --execution-jwt /jwt.hex
-      --http
-      --http-address 0.0.0.0
-      --http-port 5052
-      --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io
+    command: sh -c "sleep 10 && lighthouse beacon --network sepolia --execution-endpoint http://geth:8551 --execution-jwt /jwt.hex --http --http-address 0.0.0.0 --http-port 5052 --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io"
     networks:
       - lighthouse-network
     restart: unless-stopped
@@ -145,7 +136,7 @@ Lưu và thoát (Ctrl+O, Enter, Ctrl+X).
 Khởi động các container:
 ```bash
 cd $HOME/lighthouse-docker
-docker-compose up -d
+docker compose up -d
 ```
 - Kiểm tra trạng thái container:
 ```bash
@@ -213,17 +204,17 @@ sudo ufw status
 ## Bước 9: Quản lý và khắc phục sự cố
 - Dừng container:
 ```bash
-docker-compose down
+docker compose down
 ```
 - Khởi động lại:
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 - Xóa dữ liệu và chạy lại (nếu cần):
 ```bash
-docker-compose down
+docker compose down
 rm -rf $HOME/lighthouse-docker/geth-data $HOME/lighthouse-docker/lighthouse-data
-docker-compose up -d
+docker compose up -d
 ```
 - Kiểm tra log nếu có lỗi:
 ```bash
@@ -238,7 +229,7 @@ docker logs lighthouse
 docker pull ethereum/client-go:stable
 docker pull sigp/lighthouse:stable
 ```
-Sau đó chạy lại ``` docker-compose up -d ```
+Sau đó chạy lại ``` docker compose up -d ```
 - Sao lưu: Sao lưu thư mục ``` $HOME/lighthouse-docker ``` để tránh mất dữ liệu.
 ---
 # CHÚC CÁC BẠN THÀNH CÔNG
