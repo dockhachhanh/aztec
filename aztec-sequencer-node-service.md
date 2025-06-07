@@ -26,7 +26,7 @@ Type=simple
 User=$USER
 WorkingDirectory=/home/$USER/.aztec
 EnvironmentFile=/home/$USER/.aztec/.env
-ExecStart=/home/YOUR_USERNAME/.aztec/bin/aztec start --node --archiver --sequencer \
+ExecStart=/home/$USER/.aztec/bin/aztec start --node --archiver --sequencer \
   --network alpha-testnet \
   --l1-rpc-urls ${ETHEREUM_HOSTS} \
   --l1-consensus-host-urls ${L1_CONSENSUS_HOST_URLS} \
