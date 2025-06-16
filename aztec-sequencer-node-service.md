@@ -1,4 +1,4 @@
-Installation:
+# Installation Aztec Sequencer node: Run with service
 To use Aztec's suite of tools you'll need to:
 Get docker (engine or desktop)
 ```bash
@@ -102,3 +102,6 @@ Register with Discord**
 * `proof`:             Your sync proof (base64 string from Step 2)
 
 Then you'll get your `Apprentice` Role
+---
+# Source from: https://github.com/0xmoei
+# So much thank.
