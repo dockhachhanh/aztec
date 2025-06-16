@@ -70,3 +70,35 @@ check logs
 ```bash
 sudo journalctl -fu aztec
 ```
+---
+Get Role
+Go to the discord channel :[operators| start-here](https://discord.com/channels/1144692727120937080/1367196595866828982/1367323893324582954) and follow the prompts, You can continue the guide with my commands if you need help.
+
+![image](https://github.com/user-attachments/assets/90e9d34e-724b-481a-b41f-69b1eb4c9f65)
+
+Run this command:
+```bash
+#!/bin/bash
+
+# Gọi API để lấy BLOCK_NUMBER
+BLOCK_NUMBER=$(curl -s -X POST -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"node_getL2Tips","params":[],"id":67}' \
+  http://localhost:8081 | jq -r ".result.proven.number")
+
+# Gọi API để lấy PROOF dùng BLOCK_NUMBER
+PROOF=$(curl -s -X POST -H "Content-Type: application/json" \
+  -d "{\"jsonrpc\":\"2.0\",\"method\":\"node_getArchiveSiblingPath\",\"params\":[\"$BLOCK_NUMBER\",\"$BLOCK_NUMBER\"],\"id\":1}" \
+  http://localhost:8081 | jq -r ".result")
+
+# In kết quả
+echo "BLOCK_NUMBER: $BLOCK_NUMBER"
+echo "PROOF: $PROOF"
+```
+Register with Discord**
+* Type the following command in this Discord server: `/operator start`
+* After typing the command, Discord will display option fields that look like this:
+* `address`:            Your validator address (Ethereum Address)
+* `block-number`:      Block number for verification (Block number from Step 1)
+* `proof`:             Your sync proof (base64 string from Step 2)
+
+Then you'll get your `Apprentice` Role
