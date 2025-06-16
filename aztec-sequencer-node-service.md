@@ -1,3 +1,13 @@
+Installation:
+To use Aztec's suite of tools you'll need to:
+Get docker (engine or desktop)
+```bash
+Run bash -i <(curl -s https://install.aztec.network)
+```
+Now install the latest testnet version of aztec: 
+```
+aztec-up -v 0.87.8
+```
 Create .env
 ```bash
 nano $HOME/.aztec/.env
