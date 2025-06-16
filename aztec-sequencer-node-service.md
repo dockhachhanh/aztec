@@ -6,7 +6,8 @@ Run bash -i <(curl -s https://install.aztec.network)
 ```
 Now install the latest testnet version of aztec: 
 ```
-aztec-up -v 0.87.8
+source ~/.bashrc
+~/.aztec/bin/aztec-up -v 0.87.8
 ```
 Create .env
 ```bash
