@@ -6,6 +6,7 @@ Run bash -i <(curl -s https://install.aztec.network)
 ```
 Now install the latest testnet version of aztec: 
 ```
+export PATH="$HOME/.aztec/bin:$PATH"
 source ~/.bashrc
 ~/.aztec/bin/aztec-up -v 0.87.8
 ```
