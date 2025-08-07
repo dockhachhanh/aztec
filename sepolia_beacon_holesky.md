@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
 
   lighthouse:
-    image: sigp/lighthouse:v7.0.1
+    image: sigp/lighthouse:v7.1.0
     tty: true
     container_name: lighthouse
     depends_on:
