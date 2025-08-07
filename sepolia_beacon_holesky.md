@@ -17,6 +17,8 @@ services:
     ports:
       - "8545:8545"
       - "8551:8551"
+      - "30303:30303/tcp"
+      - "30303:30303/udp"
     command: >
       --sepolia
       --http
@@ -60,10 +62,13 @@ services:
     ports:
       - "8546:8546"
       - "8552:8552"
+      - "30304:30303/tcp"
+      - "30304:30303/udp"
     command: >
       --holesky
       --http
       --http.addr 0.0.0.0
+      --http.port 8546
       --http.api eth,net,web3
       --http.corsdomain "*"
       --http.vhosts "*"
@@ -97,4 +102,5 @@ services:
 networks:
   lighthouse-network:
     driver: bridge
+
 ```
