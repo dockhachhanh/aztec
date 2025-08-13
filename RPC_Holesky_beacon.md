@@ -31,8 +31,8 @@ services:
     ports:
       - "8700:8546"      # HTTP RPC
       - "8701:8552"      # Auth RPC
-      - "8702:30303/tcp" # P2P TCP
-      - "8703:30303/udp" # P2P UDP
+      - "8702:30305/tcp" # P2P TCP
+      - "8703:30305/udp" # P2P UDP
     command: >
       --holesky
       --http
@@ -46,6 +46,7 @@ services:
       --authrpc.jwtsecret /jwt-holesky.hex
       --authrpc.vhosts "*"
       --syncmode snap
+      --port 30305
     networks:
       - lighthouse-network
     restart: unless-stopped
@@ -61,9 +62,9 @@ services:
       - ./jwt/jwt-holesky.hex:/jwt-holesky.hex
     ports:
       - "8704:5054"      # HTTP API
-      - "8705:9002/tcp"  # P2P TCP
-      - "8706:9002/udp"  # P2P UDP
-    command: sh -c "sleep 10 && lighthouse beacon --network holesky --execution-endpoint http://geth-holesky:8552 --execution-jwt /jwt-holesky.hex --http --http-address 0.0.0.0 --http-port 5054 --checkpoint-sync-url https://checkpoint-sync.holesky.ethpandaops.io"
+      - "8705:9004/tcp"  # P2P TCP
+      - "8706:9004/udp"  # P2P UDP
+    command: sh -c "sleep 10 && lighthouse beacon --network holesky --execution-endpoint http://geth-holesky:8552 --execution-jwt /jwt-holesky.hex --http --http-address 0.0.0.0 --http-port 5054 --checkpoint-sync-url https://checkpoint-sync.holesky.ethpandaops.io --listen-address 0.0.0.0:9004"
     networks:
       - lighthouse-network
     restart: unless-stopped
