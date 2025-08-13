@@ -19,7 +19,6 @@ cd $HOME/holesky
 nano docker-compose.yml
 ```
 ```yml
-cat docker-compose.yml
 version: '3.8'
 services:
   geth-holesky:
