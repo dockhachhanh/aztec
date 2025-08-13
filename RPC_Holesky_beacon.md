@@ -1,5 +1,20 @@
 ```bash
 mkdir $HOME/holesky
+```
+Bước 3: Creat JWT file
+```bash
+mkdir -p $HOME/holesky/jwt
+openssl rand -hex 32 > $HOME/holesky/jwt/jwt-holesky.hex
+```
+Set law.
+```bash
+chmod 600 $HOME/holesky/jwt/jwt-holesky.hex
+# Kiểm tra tệp:
+cat $HOME/holesky/jwt/jwt-holesky.hex
+# Kết quả sẽ là một chuỗi hex, ví dụ:
+# d176xxxx....
+```
+```bash
 cd $HOME/holesky
 nano docker-compose.yml
 ```
