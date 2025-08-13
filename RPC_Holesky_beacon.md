@@ -1,6 +1,6 @@
 ```bash
-mkdir holesky
-cd holesky
+mkdir $HOME/holesky
+cd $HOME/holesky
 nano docker-compose.yml
 ```
 ```yml
