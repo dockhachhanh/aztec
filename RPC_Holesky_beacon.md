@@ -19,6 +19,7 @@ cd $HOME/holesky
 nano docker-compose.yml
 ```
 ```yml
+cat docker-compose.yml
 version: '3.8'
 services:
   geth-holesky:
@@ -29,24 +30,24 @@ services:
       - ./geth-holesky-data:/root/.ethereum
       - ./jwt/jwt-holesky.hex:/jwt-holesky.hex
     ports:
-      - "8700:8546"      # HTTP RPC
-      - "8701:8552"      # Auth RPC
-      - "8702:30305/tcp" # P2P TCP
-      - "8703:30305/udp" # P2P UDP
+      - "8700:8700"      # HTTP RPC
+      - "8701:8701"      # Auth RPC
+      - "8702:8702/tcp" # P2P TCP
+      - "8702:8702/udp" # P2P UDP
     command: >
       --holesky
       --http
       --http.addr 0.0.0.0
-      --http.port 8546
+      --http.port 8700
       --http.api eth,net,web3
       --http.corsdomain "*"
       --http.vhosts "*"
       --authrpc.addr 0.0.0.0
-      --authrpc.port 8552
+      --authrpc.port 8701
       --authrpc.jwtsecret /jwt-holesky.hex
       --authrpc.vhosts "*"
       --syncmode snap
-      --port 30305
+      --port 8702
     networks:
       - lighthouse-network
     restart: unless-stopped
@@ -61,10 +62,10 @@ services:
       - ./lighthouse-holesky-data:/root/.lighthouse
       - ./jwt/jwt-holesky.hex:/jwt-holesky.hex
     ports:
-      - "8704:5054"      # HTTP API
-      - "8705:9004/tcp"  # P2P TCP
-      - "8706:9004/udp"  # P2P UDP
-    command: sh -c "sleep 10 && lighthouse beacon --network holesky --execution-endpoint http://geth-holesky:8552 --execution-jwt /jwt-holesky.hex --http --http-address 0.0.0.0 --http-port 5054 --checkpoint-sync-url https://checkpoint-sync.holesky.ethpandaops.io --listen-address 0.0.0.0:9004"
+      - "8704:8704"      # HTTP API
+      - "8705:8705/tcp"  # P2P TCP
+      - "8705:8705/udp"  # P2P UDP
+    command: sh -c "sleep 10 && lighthouse beacon --network holesky --execution-endpoint http://geth-holesky:8701 --execution-jwt /jwt-holesky.hex --http --http-address 0.0.0.0 --http-port 8704 --checkpoint-sync-url https://checkpoint-sync.holesky.ethpandaops.io --port 8705"
     networks:
       - lighthouse-network
     restart: unless-stopped
