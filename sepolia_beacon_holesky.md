@@ -94,7 +94,8 @@ services:
       - "5054:5054"
       - "9002:9002/udp"
       - "9002:9002/tcp"
-    command: sh -c "sleep 10 && lighthouse beacon --network holesky --execution-endpoint http://geth-holesky:8552 --execution-jwt /jwt-holesky.hex --http --http-address 0.0.0.0 --http-port 5054 --checkpoint-sync-url https://checkpoint-sync.holesky.ethpandaops.io"
+      - "8707:5055"      # Metrics (optional)
+    command: sh -c "sleep 10 && lighthouse beacon --network holesky --execution-endpoint http://geth-holesky:8552 --execution-jwt /jwt-holesky.hex --http --http-address 0.0.0.0 --http-port 5054 --checkpoint-sync-url https://checkpoint-sync.holesky.ethpandaops.io --port 9004 --metrics --metrics-address 0.0.0.0 --metrics-port 5055"
     networks:
       - lighthouse-network
     restart: unless-stopped
