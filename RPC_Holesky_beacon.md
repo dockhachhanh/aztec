@@ -38,7 +38,7 @@ services:
       --http
       --http.addr 0.0.0.0
       --http.port 8700
-      --http.api eth,net,web3
+      --http.api eth,net,web3,engine
       --http.corsdomain "*"
       --http.vhosts "*"
       --authrpc.addr 0.0.0.0
