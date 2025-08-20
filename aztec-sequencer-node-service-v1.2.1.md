@@ -3,17 +3,17 @@ cd ~/.aztec
 nano .env
 ```
 ```
-ETHEREUM_HOSTS=
-L1_CONSENSUS_HOST_URLS=
-VALIDATOR_PRIVATE_KEY=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-COINBASE=0xCC9b931D13xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ETHEREUM_HOSTS=http://your-ethereum-node:8545
+L1_CONSENSUS_HOST_URLS=http://your-consensus-node:5052
+VALIDATOR_PRIVATE_KEY=0x_your_actual_private_key_here
+COINBASE=0x_your_actual_coinbase_address_here
 P2P_IP=xxx.xxx.xxx.xxx
 P2P_PORT=40401
 PORT=8081
-VALIDATOR_PRIVATE_KEY_1=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-VALIDATOR_PRIVATE_KEY_2=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-VALIDATOR_PRIVATE_KEY_3=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-VALIDATOR_PRIVATE_KEY_4=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+VALIDATOR_PRIVATE_KEY_1=0x_your_actual_key_1
+VALIDATOR_PRIVATE_KEY_2=0x_your_actual_key_2
+VALIDATOR_PRIVATE_KEY_3=0x_your_actual_key_3
+VALIDATOR_PRIVATE_KEY_4=0x_your_actual_key_4
 ```
 ```bash
 chmod 600 ~/.aztec/.env
@@ -53,4 +53,14 @@ LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 EOF
+```
+```
+sudo systemctl daemon-reload
+sudo systemctl start aztec.service
+sudo systemctl enable aztec.service
+sudo systemctl status aztec.service
+```
+Check logs:
+```
+journalctl -u aztec.service -f
 ```
