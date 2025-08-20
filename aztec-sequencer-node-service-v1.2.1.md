@@ -16,6 +16,10 @@ VALIDATOR_PRIVATE_KEY_3=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 VALIDATOR_PRIVATE_KEY_4=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 ```bash
+chmod 600 ~/.aztec/.env
+chown $USER_NAME:$USER_NAME ~/.aztec/.env
+```
+```bash
 USER_NAME=$(whoami)
 HOME_DIR=$(eval echo ~$USER_NAME)
 
