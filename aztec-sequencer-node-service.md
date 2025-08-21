@@ -2,7 +2,7 @@
 To use Aztec's suite of tools you'll need to:
 Get docker (engine or desktop)
 ```bash
-Run bash -i <(curl -s https://install.aztec.network)
+bash -i <(curl -s https://install.aztec.network)
 ```
 Now install the latest testnet version of aztec: 
 ```
