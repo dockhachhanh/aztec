@@ -1,3 +1,6 @@
+```bash
+bash -i <(curl -s https://install.aztec.network)
+```
 ```
 cd ~/.aztec
 nano .env
