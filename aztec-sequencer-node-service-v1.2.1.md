@@ -19,10 +19,6 @@ VALIDATOR_PRIVATE_KEY_3=0x_your_actual_key_3
 VALIDATOR_PRIVATE_KEY_4=0x_your_actual_key_4
 ```
 ```bash
-chmod 600 ~/.aztec/.env
-chown $USER_NAME:$USER_NAME ~/.aztec/.env
-```
-```bash
 USER_NAME=$(whoami)
 HOME_DIR=$(eval echo ~$USER_NAME)
 
@@ -67,4 +63,8 @@ sudo systemctl status aztec.service
 Check logs:
 ```
 journalctl -u aztec.service -f
+```
+```bash
+chmod 600 ~/.aztec/.env
+chown $USER_NAME:$USER_NAME ~/.aztec/.env
 ```
