@@ -64,7 +64,8 @@ Check logs:
 ```
 journalctl -u aztec.service -f
 ```
-```bash
-chmod 600 ~/.aztec/.env
-chown $USER_NAME:$USER_NAME ~/.aztec/.env
+or check logs by docker command.
+```
+docker ps
+docker logs -f <container ID> -n 100
 ```
