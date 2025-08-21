@@ -37,15 +37,15 @@ Type=simple
 User=$USER_NAME
 WorkingDirectory=$HOME_DIR/.aztec
 EnvironmentFile=$HOME_DIR/.aztec/.env
-ExecStart=$HOME_DIR/.aztec/bin/aztec start --node --archiver --sequencer \
-  --network alpha-testnet \
-  --l1-rpc-urls ${ETHEREUM_HOSTS} \
-  --l1-consensus-host-urls ${L1_CONSENSUS_HOST_URLS} \
-  --sequencer.validatorPrivateKeys ${VALIDATOR_PRIVATE_KEY},${VALIDATOR_PRIVATE_KEY_1},${VALIDATOR_PRIVATE_KEY_2},${VALIDATOR_PRIVATE_KEY_3},${VALIDATOR_PRIVATE_KEY_4} \
-  --sequencer.publisherPrivateKey ${VALIDATOR_PRIVATE_KEY} \
-  --sequencer.coinbase ${COINBASE} \
-  --p2p.p2pIp ${P2P_IP} \
-  --p2p.p2pPort ${P2P_PORT} \
+ExecStart=$HOME_DIR/.aztec/bin/aztec start --node --archiver --sequencer \\
+  --network alpha-testnet \\
+  --l1-rpc-urls ${ETHEREUM_HOSTS} \\
+  --l1-consensus-host-urls ${L1_CONSENSUS_HOST_URLS} \\
+  --sequencer.validatorPrivateKeys ${VALIDATOR_PRIVATE_KEY},${VALIDATOR_PRIVATE_KEY_1},${VALIDATOR_PRIVATE_KEY_2},${VALIDATOR_PRIVATE_KEY_3},${VALIDATOR_PRIVATE_KEY_4} \\
+  --sequencer.publisherPrivateKey ${VALIDATOR_PRIVATE_KEY} \\
+  --sequencer.coinbase ${COINBASE} \\
+  --p2p.p2pIp ${P2P_IP} \\
+  --p2p.p2pPort ${P2P_PORT} \\
   --port ${PORT}
 Restart=always
 RestartSec=5
