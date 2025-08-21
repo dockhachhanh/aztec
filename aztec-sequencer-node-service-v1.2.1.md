@@ -30,10 +30,10 @@ Requires=docker.service
 
 [Service]
 Type=simple
-User=og
-WorkingDirectory=/home/og/.aztec
-EnvironmentFile=/home/og/.aztec/.env
-ExecStart=/home/og/.aztec/bin/aztec start --node --archiver --sequencer \
+User=$USER_NAME
+WorkingDirectory=$HOME_DIR/.aztec
+EnvironmentFile=$HOME_DIR/.aztec/.env
+ExecStart=$HOME_DIR/.aztec/bin/aztec start --node --archiver --sequencer \
   --network alpha-testnet \
   --l1-rpc-urls ${ETHEREUM_HOSTS} \
   --l1-consensus-host-urls ${L1_CONSENSUS_HOST_URLS} \
