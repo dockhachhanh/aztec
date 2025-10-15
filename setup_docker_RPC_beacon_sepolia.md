@@ -77,7 +77,7 @@ nano $HOME/lighthouse-docker/docker-compose.yml
 ```yaml
 services:
   geth:
-    image: ethereum/client-go:stable
+    image: ethereum/client-go:v1.16.4
     tty: true
     container_name: geth
     volumes:
@@ -102,7 +102,7 @@ services:
     restart: unless-stopped
 
   lighthouse:
-    image: sigp/lighthouse:v7.0.1
+    image: sigp/lighthouse:v8.0.0-rc.1
     tty: true
     container_name: lighthouse
     depends_on:
@@ -114,7 +114,7 @@ services:
       - "5052:5052"
       - "9000:9000/udp"
       - "9000:9000/tcp"
-    command: sh -c "sleep 10 && lighthouse beacon --network sepolia --execution-endpoint http://geth:8551 --execution-jwt /jwt.hex --http --http-address 0.0.0.0 --http-port 5052 --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io"
+    command: sh -c "sleep 10 && lighthouse beacon --network sepolia --supernode --execution-endpoint http://geth:8551 --execution-jwt /jwt.hex --http --http-address 0.0.0.0 --http-port 5052 --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io"
     networks:
       - lighthouse-network
     restart: unless-stopped
