@@ -28,6 +28,41 @@ source ~/.aztec/.env
 cast balance $COINBASE --rpc-url $ETHEREUM_HOSTS
 ```
 If the balance is low, send more ETH to that address.
+
+Open your .env file:
+```bash
+nano ~/.aztec/.env
+```
+Add the following new variables (or update existing ones):
+```
+# === Aztec v2.1.2 Environment ===
+
+# Ethereum RPC endpoint
+ETHEREUM_HOSTS=https://ethereum-sepolia-rpc.publicnode.com
+
+# Rollup contract address (main Aztec rollup)
+ROLLUP=0xebd99ff0ff6677205509ae73f93d0ca52ac85d67
+
+# Old sequencer private key (the one used in previous testnets)
+PRIVATE_KEY_OF_OLD_SEQUENCER=0xYOUR_PRIVATE_KEY
+
+# Validator wallet (the one used to send approve & join tx)
+VALIDATOR_PRIVATE_KEY=0xYOUR_VALIDATOR_PRIVATE_KEY
+COINBASE=0xYOUR_VALIDATOR_WALLET_ADDRESS
+
+# BLS attester secret key (generated from step 5)
+BLS_ATTESTER_ADDRESS=0xYOUR_BLS_SECRET_KEY
+
+# Attester Ethereum address (from key1.json)
+ETH_ATTESTER_ADDRESS=0xYOUR_ATTESTER_ETH_ADDRESS
+
+# Any ETH address that will receive withdraws/rewards
+ANY_ETH_ADDRESS=0xYOUR_WITHDRAW_WALLET
+
+# Network name
+NETWORK=testnet
+
+```
 4. Approve the Rollup Contract
 
 Before adding a validator, you must approve the rollup contract to spend your stake tokens.
@@ -87,3 +122,8 @@ source .env
   --bls-secret-key $BLS_ATTESTER_ADDRESS \
   --rollup $ROLLUP
 ```
+Final
+```bash
+sudo systemctl start aztec
+```
+Check logs.
