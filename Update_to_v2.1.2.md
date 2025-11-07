@@ -1,6 +1,6 @@
+## 1. Stop your node and update to v2.1.2
 ```
 sudo systemctl stop aztec
-
 ```
 ```
 cd ~/.aztec/bin
@@ -11,7 +11,7 @@ cd ~/.aztec/bin
 ./aztec -V
 # will see 2.1.2
 ```
-2. Install cast (Foundry tool)
+## 2. Install cast (Foundry tool)
 If cast is not installed yet:
 ```bash
 curl -L https://foundry.paradigm.xyz | bash
@@ -21,7 +21,7 @@ foundryup
 ```bash
 cast --version
 ```
-. Check validator wallet balance
+## 3. Check validator wallet balance
 Make sure your validator wallet (the one holding ETH) has enough funds for gas.
 ```bash
 source ~/.aztec/.env
@@ -29,7 +29,7 @@ cast balance $COINBASE --rpc-url $ETHEREUM_HOSTS
 ```
 If the balance is low, send more ETH to that address.
 
-Open your .env file:
+## 4. Open your .env file:
 ```bash
 nano ~/.aztec/.env
 ```
@@ -63,7 +63,7 @@ ANY_ETH_ADDRESS=0xYOUR_WITHDRAW_WALLET
 NETWORK=testnet
 
 ```
-4. Approve the Rollup Contract
+##5. Approve the Rollup Contract
 
 Before adding a validator, you must approve the rollup contract to spend your stake tokens.
 ```bash
@@ -75,12 +75,12 @@ cast send 0x139d2a7a0881e16332d7D1F8DB383A4507E1Ea7A \
   --rpc-url ${ETHEREUM_HOSTS}
 ```
 This allows the Rollup contract to handle up to 200,000 tokens from your validator wallet.
-5. Generate BLS key
+## 6. Generate BLS key
 
 Before adding your validator, you must create a BLS keypair for attestation.
 This is different from your Ethereum validator key.
 
-Option 1 — Generate new ETH + BLS keystore (recommended)
+### Option 1 — Generate new ETH + BLS keystore (recommended)
 ```bash
 aztec validator-keys new \
   --fee-recipient 0x0000000000000000000000000000000000000000000000000000000000000000 \
@@ -88,7 +88,8 @@ aztec validator-keys new \
   --file key1.json
 ```
 - This will create both Ethereum and BLS keys under ~/.aztec/keystore/key1.json.
-- The command will also display a mnemonic phrase — save it securely.
+
+### Option 2
 ```bash
 aztec validator-keys new \
   --mnemonic "your twelve word mnemonic here" \
@@ -107,7 +108,7 @@ acc1:
     eth: 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb
     bls: 0x1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890
 ```
-6. Add validator to the network
+## 7. Add validator to the network
 Run the following command to register your validator:
 If you are not a validator
 ```bash
@@ -122,7 +123,7 @@ source .env
   --bls-secret-key $BLS_ATTESTER_ADDRESS \
   --rollup $ROLLUP
 ```
-Final
+## Final
 ```bash
 sudo systemctl start aztec
 ```
