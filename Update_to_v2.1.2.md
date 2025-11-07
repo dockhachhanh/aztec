@@ -138,3 +138,22 @@ if see - not in validator list
 ```
 0x0000000000000000000000000000000000000000...
 ```
+---
+🧾 Step-by-Step Guide: Check If Your Validator Is Registered on Sepolia
+1️⃣ Go to the Rollup Contract
+
+Open the Rollup contract page on Etherscan:
+```
+ https://sepolia.etherscan.io/address/0xebd99ff0ff6677205509ae73f93d0ca52ac85d67#readContract
+````
+2️⃣ Go to the “Read Contract” tab
+
+You’ll see a list of readable functions (view calls).
+Scroll down to function #10, which is usually named = getAttesterView
+input your atter ETH address
+Click Query button
+```
+getAttesterView(address) method Response ]
+    tuple :  0,0,0,0,0,0x0000000000000000000000000000000000000000,false,false,0,0,0x0000000000000000000000000000000000000000
+```
+fail and you are not in validator list.
