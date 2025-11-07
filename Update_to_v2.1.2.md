@@ -128,3 +128,13 @@ source .env
 sudo systemctl start aztec
 ```
 Check logs.
+---
+Check validator.
+```
+cast call 0xebd99ff0ff6677205509ae73f93d0ca52ac85d67 "getAttesterView(address)" $ETH_ATTESTER_ADDRESS  --rpc-url $ETHEREUM_HOSTS
+
+```
+if see - not in validator list
+```
+tuple :  0,0,0,0,0,0x0000000000000000000000000000000000000000,false,false,0,0,0x0000000000000000000000000000000000000000
+```
