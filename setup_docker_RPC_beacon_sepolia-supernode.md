@@ -4,42 +4,30 @@ install follow https://github.com/dockhachhanh/aztec/blob/main/setup_docker_RPC_
 nano docker-compose.yml
 ```
 ```bash
-version: "3.9"
+version: '3.8'
 
 services:
   geth:
-    image: ethereum/client-go:v1.16.4
+    image: ethereum/client-go:v1.16.7
     container_name: geth
     tty: true
-    user: "root"
     volumes:
-      - ./geth-data:/home/quy/geth-sepolia
+      - ./geth-data:/root/.ethereum
       - ./jwt/jwt.hex:/jwt.hex
     ports:
-      - "8645:8645"   # HTTP
-      - "8651:8651"   # AuthRPC
-      - "30304:30304" # P2P
-      - "8661:8661"   # Metrics
+      - "8545:8545"
+      - "8551:8551"
     command: >
       --sepolia
-      --syncmode snap
-      --cache=61440
-      --maxpeers=100
-      --datadir /home/quy/geth-sepolia
       --http
       --http.addr 0.0.0.0
-      --http.port 8645
-      --http.api eth,net,web3,engine,txpool
+      --http.api eth,net,web3
       --authrpc.addr 0.0.0.0
-      --authrpc.port 8651
+      --authrpc.port 8551
       --authrpc.jwtsecret /jwt.hex
       --authrpc.vhosts=*
-      --http.corsdomain=*
-      --metrics
-      --metrics.port 8661
-      --pprof
-      --port 30304
-      --blobpool.datadir /home/quy/geth-sepolia/blobs
+      --ws
+      --syncmode snap
     networks:
       - lighthouse-network
     restart: unless-stopped
@@ -51,29 +39,26 @@ services:
     depends_on:
       - geth
     volumes:
-      - ./lighthouse-data:/home/quy/.lighthouse
+      - ./lighthouse-data:/root/.lighthouse
       - ./jwt/jwt.hex:/jwt.hex
     ports:
       - "5052:5052"
       - "9000:9000/udp"
       - "9000:9000/tcp"
     command: >
-      sh -c "
-        sleep 10 &&
-        lighthouse beacon_node --supernode
-        --network sepolia
-        --execution-endpoint http://geth:8651
-        --execution-jwt /jwt.hex
-        --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io
-        --http
-        --http-address 0.0.0.0
-        --http-port 5052
-        --metrics
-        --metrics-address 0.0.0.0
-        --metrics-allow-origin '*'
-        --suggested-fee-recipient 0x7b896407539587864401F92535cFa2b2f86bfaeD
-        --builder https://builder-relay-sepolia.flashbots.net
-      "
+      sh -c "sleep 10 && lighthouse beacon \
+      --network sepolia \
+      --supernode \
+      --execution-endpoint http://geth:8551 \
+      --execution-jwt /jwt.hex \
+      --http \
+      --http-address 0.0.0.0 \
+      --http-port 5052 \
+      --metrics \
+      --metrics-address 0.0.0.0 \
+      --metrics-allow-origin '*' \
+      --builder https://builder-relay-sepolia.flashbots.net \
+      --checkpoint-sync-url https://beaconstate-sepolia.chainsafe.io"
     networks:
       - lighthouse-network
     restart: unless-stopped
@@ -81,5 +66,6 @@ services:
 networks:
   lighthouse-network:
     driver: bridge
+
 
 ```
