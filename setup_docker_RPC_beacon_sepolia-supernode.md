@@ -1,3 +1,5 @@
+install follow https://github.com/dockhachhanh/aztec/blob/main/setup_docker_RPC_beacon_sepolia.md before
+
 ```bash
 nano docker-compose.yml
 ```
